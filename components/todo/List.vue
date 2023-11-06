@@ -1,6 +1,6 @@
 <template lang="pug">
 div(v-auto-animate)
-  template(v-if="todos.filter(filter).length")
+  template(v-if="filteredLength")
     template(v-for="(todo, i) of todos", :key="todo.key")
       TodoItem.my-2(
         v-if="filter(todo)",
@@ -21,4 +21,6 @@ const todos = computed({
   get: () => reactive(props.modelValue),
   set: (todos) => emit("update:modelValue", todos),
 });
+
+const filteredLength = computed(() => todos.value.filter(props.filter).length)
 </script>
